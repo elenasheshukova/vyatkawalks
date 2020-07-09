@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct Place {
-    var id: Int
+struct Place: Codable {
+    var id: String
     var name: String
+    var image: String
+    var text: String
+    var address: String
+    var coordinateLatitude: String
+    var coordinateLongitude: String
 }

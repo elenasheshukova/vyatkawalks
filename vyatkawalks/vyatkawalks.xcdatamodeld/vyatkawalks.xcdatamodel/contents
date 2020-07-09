@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ImageEntity" representedClassName=".ImageEntity" syncable="YES" codeGenerationType="category">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlaceEntity" inverseName="images" inverseEntity="PlaceEntity"/>
+    </entity>
     <entity name="PlaceEntity" representedClassName=".PlaceEntity" syncable="YES" codeGenerationType="category">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="coordinateLatitude" optional="YES" attributeType="String"/>
         <attribute name="coordinateLongitude" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ImageEntity" inverseName="place" inverseEntity="ImageEntity"/>
         <relationship name="walk" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WalkEntity" inverseName="places" inverseEntity="WalkEntity"/>
     </entity>
     <entity name="WalkEntity" representedClassName=".WalkEntity" syncable="YES" codeGenerationType="category">
         <attribute name="id" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="placesid" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaceEntity" inverseName="walk" inverseEntity="PlaceEntity"/>
     </entity>
     <elements>
-        <element name="PlaceEntity" positionX="-63" positionY="0" width="128" height="148"/>
-        <element name="WalkEntity" positionX="-334.88671875" positionY="-87.92578125" width="128" height="118"/>
+        <element name="PlaceEntity" positionX="-161.6328125" positionY="-79.3984375" width="128" height="178"/>
+        <element name="WalkEntity" positionX="-342.01171875" positionY="-77.39453125" width="128" height="133"/>
+        <element name="ImageEntity" positionX="1.1328125" positionY="-78.5625" width="128" height="103"/>
     </elements>
 </model>

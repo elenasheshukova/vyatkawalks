@@ -11,6 +11,9 @@
 		E7167FF324A134D700A3EE97 /* PlaceMKPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7167FF224A134D700A3EE97 /* PlaceMKPointAnnotation.swift */; };
 		E7167FFB24A4BF3000A3EE97 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7167FFA24A4BF3000A3EE97 /* MapViewController.swift */; };
 		E7167FFD24A4E16B00A3EE97 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7167FFC24A4E16B00A3EE97 /* ListViewController.swift */; };
+		E7167FFF24B636F600A3EE97 /* ImageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7167FFE24B636F600A3EE97 /* ImageEntity.swift */; };
+		E716854024B7B57100A3EE97 /* places.json in Resources */ = {isa = PBXBuildFile; fileRef = E716853F24B7B57100A3EE97 /* places.json */; };
+		E716854224B7B65400A3EE97 /* walks.json in Resources */ = {isa = PBXBuildFile; fileRef = E716854124B7B65400A3EE97 /* walks.json */; };
 		E72561222483F6F6008D3291 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72561212483F6F6008D3291 /* AppDelegate.swift */; };
 		E72561242483F6F6008D3291 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72561232483F6F6008D3291 /* SceneDelegate.swift */; };
 		E72561262483F6F6008D3291 /* WalksListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72561252483F6F6008D3291 /* WalksListViewController.swift */; };
@@ -30,10 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E7167FF024A0D5F600A3EE97 /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaceDetailViewController.swift; path = vyatkawalks/Controller/PlaceDetailViewController.swift; sourceTree = SOURCE_ROOT; };
+		E7167FF024A0D5F600A3EE97 /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaceDetailViewController.swift; path = vyatkawalks/PlaceDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		E7167FF224A134D700A3EE97 /* PlaceMKPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMKPointAnnotation.swift; sourceTree = "<group>"; };
 		E7167FFA24A4BF3000A3EE97 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E7167FFC24A4E16B00A3EE97 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		E7167FFE24B636F600A3EE97 /* ImageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEntity.swift; sourceTree = "<group>"; };
+		E716853F24B7B57100A3EE97 /* places.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = places.json; sourceTree = "<group>"; };
+		E716854124B7B65400A3EE97 /* walks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = walks.json; sourceTree = "<group>"; };
 		E72561212483F6F6008D3291 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E72561232483F6F6008D3291 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E72561252483F6F6008D3291 /* WalksListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalksListViewController.swift; sourceTree = "<group>"; };
@@ -43,7 +49,7 @@
 		E725612F2483F6F8008D3291 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E72561372484305A008D3291 /* PlacesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewController.swift; sourceTree = "<group>"; };
 		E725613C2486B276008D3291 /* WalksListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalksListCollectionViewCell.swift; sourceTree = "<group>"; };
-		E725613E2486CBE9008D3291 /* WalkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WalkDetailViewController.swift; path = vyatkawalks/Controller/WalkDetailViewController.swift; sourceTree = SOURCE_ROOT; };
+		E725613E2486CBE9008D3291 /* WalkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WalkDetailViewController.swift; path = vyatkawalks/WalkDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		E72561402487CFBE008D3291 /* Walk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Walk.swift; path = vyatkawalks/Model/Walk.swift; sourceTree = SOURCE_ROOT; };
 		E72561422487D02B008D3291 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Place.swift; path = vyatkawalks/Model/Place.swift; sourceTree = SOURCE_ROOT; };
 		E72561452487D7CD008D3291 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -66,6 +72,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E716853E24B7B53500A3EE97 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E716853F24B7B57100A3EE97 /* places.json */,
+				E716854124B7B65400A3EE97 /* walks.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E72561152483F6F6008D3291 = {
 			isa = PBXGroup;
 			children = (
@@ -78,11 +93,20 @@
 		E72561202483F6F6008D3291 /* vyatkawalks */ = {
 			isa = PBXGroup;
 			children = (
+				E716853E24B7B53500A3EE97 /* Resources */,
 				E72561212483F6F6008D3291 /* AppDelegate.swift */,
 				E72561232483F6F6008D3291 /* SceneDelegate.swift */,
 				E72561392486B075008D3291 /* Model */,
-				E725613A2486B08F008D3291 /* View */,
-				E725613B2486B09C008D3291 /* Controller */,
+				E72561272483F6F6008D3291 /* Main.storyboard */,
+				E72561252483F6F6008D3291 /* WalksListViewController.swift */,
+				E725613C2486B276008D3291 /* WalksListCollectionViewCell.swift */,
+				E725613E2486CBE9008D3291 /* WalkDetailViewController.swift */,
+				E7167FFA24A4BF3000A3EE97 /* MapViewController.swift */,
+				E7167FFC24A4E16B00A3EE97 /* ListViewController.swift */,
+				E72561372484305A008D3291 /* PlacesListViewController.swift */,
+				E7167FF224A134D700A3EE97 /* PlaceMKPointAnnotation.swift */,
+				E72AF2A0249AA3D2004FDF49 /* PlacesListTableViewCell.swift */,
+				E7167FF024A0D5F600A3EE97 /* PlaceDetailViewController.swift */,
 				E725612A2483F6F8008D3291 /* Assets.xcassets */,
 				E725612C2483F6F8008D3291 /* LaunchScreen.storyboard */,
 				E725612F2483F6F8008D3291 /* Info.plist */,
@@ -98,32 +122,9 @@
 				E72561422487D02B008D3291 /* Place.swift */,
 				E7B836F024928ED400D20C0F /* WalkEntity.swift */,
 				E7B836F224928EFF00D20C0F /* PlaceEntity.swift */,
+				E7167FFE24B636F600A3EE97 /* ImageEntity.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		E725613A2486B08F008D3291 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E72561272483F6F6008D3291 /* Main.storyboard */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		E725613B2486B09C008D3291 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				E72561252483F6F6008D3291 /* WalksListViewController.swift */,
-				E725613C2486B276008D3291 /* WalksListCollectionViewCell.swift */,
-				E725613E2486CBE9008D3291 /* WalkDetailViewController.swift */,
-				E7167FFA24A4BF3000A3EE97 /* MapViewController.swift */,
-				E7167FFC24A4E16B00A3EE97 /* ListViewController.swift */,
-				E72561372484305A008D3291 /* PlacesListViewController.swift */,
-				E7167FF224A134D700A3EE97 /* PlaceMKPointAnnotation.swift */,
-				E72AF2A0249AA3D2004FDF49 /* PlacesListTableViewCell.swift */,
-				E7167FF024A0D5F600A3EE97 /* PlaceDetailViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		E72561442487D7CD008D3291 /* Frameworks */ = {
@@ -196,6 +197,8 @@
 				E725612E2483F6F8008D3291 /* LaunchScreen.storyboard in Resources */,
 				E725612B2483F6F8008D3291 /* Assets.xcassets in Resources */,
 				E72561292483F6F6008D3291 /* Main.storyboard in Resources */,
+				E716854224B7B65400A3EE97 /* walks.json in Resources */,
+				E716854024B7B57100A3EE97 /* places.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +263,7 @@
 				E725613D2486B276008D3291 /* WalksListCollectionViewCell.swift in Sources */,
 				E7B836F124928ED400D20C0F /* WalkEntity.swift in Sources */,
 				E7B836F324928EFF00D20C0F /* PlaceEntity.swift in Sources */,
+				E7167FFF24B636F600A3EE97 /* ImageEntity.swift in Sources */,
 				E7167FFB24A4BF3000A3EE97 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

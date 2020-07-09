@@ -13,6 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //deleteAllRecords()
+        
+        let defaults = UserDefaults.standard
+        let !isPreloaded = defaults.bool(forKey: "isPreloaded")
+        if isPreloaded {
+            preloadData()
+            defaults.set(true, forKey: "isPreloaded")
+        }
+        
         return true
     }
 
@@ -77,5 +86,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    
+    func preloadData(){
+        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+        
+        if let filePath = Bundle.main.path(forResource: "places", ofType: "json") {
+            let jsonData = try! String(contentsOfFile: filePath).data(using: .utf8)!
+            let places = try! JSONDecoder().decode(Array<Place>.self, from: jsonData)
+            for place in places {
+                let placeEntity = PlaceEntity(context: appDelegate.persistentContainer.viewContext)
+                placeEntity.id = place.id //UUID().uuidString
+                placeEntity.name = place.name
+                placeEntity.image = place.image
+                placeEntity.text = place.text
+                placeEntity.address = place.address
+                placeEntity.coordinateLatitude = place.coordinateLatitude
+                placeEntity.coordinateLongitude = place.coordinateLongitude
+            }
+        }
+        
+        if let filePath = Bundle.main.path(forResource: "walks", ofType: "json") {
+            //let jsonData = try! String(contentsOfFile: "/Users/elenachervotkina/Desktop/Deveioper/vyatkawalks/vyatkawalks/walks.json").data(using: .utf8)!
+            let jsonData = try! String(contentsOfFile: filePath).data(using: .utf8)!
+            let walks = try! JSONDecoder().decode(Array<Walk>.self, from: jsonData)
+            for walk in walks {
+                let walkEntity = WalkEntity(context: appDelegate.persistentContainer.viewContext)
+                walkEntity.id = walk.id //UUID().uuidString
+                walkEntity.name = walk.name
+                walkEntity.image = walk.image
+                walkEntity.text = walk.text
+                walkEntity.placesid = walk.places.joined(separator:" ")
+            
+                if walk.places.count > 0 {
+                    let request: NSFetchRequest<PlaceEntity> = PlaceEntity.fetchRequest()
+                    let predicate = NSPredicate(format: "id IN %@", walk.places)
+                    request.predicate = predicate
+                    let pl = try! appDelegate.persistentContainer.viewContext.fetch(request)
+                    walkEntity.places = NSSet(array: pl)
+                }
+            }
+        }
+        
+        appDelegate.saveContext()
+    }
+    
+    func deleteAllRecords() {
+        //delete all data
+        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+        
+        let deleteFetchWalk = NSFetchRequest<NSFetchRequestResult>(entityName: "WalkEntity")
+        let deleteRequestWalk = NSBatchDeleteRequest(fetchRequest: deleteFetchWalk)
+        let deleteFetchPlace = NSFetchRequest<NSFetchRequestResult>(entityName: "PlaceEntity")
+        let deleteRequestPlace = NSBatchDeleteRequest(fetchRequest: deleteFetchPlace)
+
+        do {
+            try appDelegate.persistentContainer.viewContext.execute(deleteRequestWalk)
+            try appDelegate.persistentContainer.viewContext.execute(deleteRequestPlace)
+            appDelegate.saveContext()
+        } catch {
+            print ("There was an error")
+        }
+        
     }
 }
