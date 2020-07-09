@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //deleteAllRecords()
         
         let defaults = UserDefaults.standard
-        let !isPreloaded = defaults.bool(forKey: "isPreloaded")
-        if isPreloaded {
+        let isPreloaded = defaults.bool(forKey: "isPreloaded")
+        if !isPreloaded {
             preloadData()
             defaults.set(true, forKey: "isPreloaded")
         }
