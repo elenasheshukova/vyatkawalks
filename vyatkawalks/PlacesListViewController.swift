@@ -41,8 +41,6 @@ class PlacesListViewController: UIViewController {
     func getPlaces() -> [PlaceEntity] {
         var places: [PlaceEntity] = []
         let request: NSFetchRequest<PlaceEntity> = PlaceEntity.fetchRequest()
-        let predicate = NSPredicate(format: "image != %@", "")
-        request.predicate = predicate
         do {
             places = try appDelegate.persistentContainer.viewContext.fetch(request)
         } catch {
