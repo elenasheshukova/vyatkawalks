@@ -51,7 +51,7 @@ extension WalksListViewController: UICollectionViewDataSource, UICollectionViewD
         
         if let cell = walksListCollectionView.dequeueReusableCell(withReuseIdentifier: "walksListCell", for: indexPath) as? WalksListCollectionViewCell {
             
-            cell.nameLabel.attributedText = NSMutableAttributedString(string: walks[indexPath.item].name ?? "", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 17)])
+            cell.nameLabel.attributedText = NSMutableAttributedString(string: walks[indexPath.item].name ?? "", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20)])
             //cell.nameLabel.text = walks[indexPath.item].name
             
             cell.imageView.image = UIImage(named: walks[indexPath.item].image ?? "")
