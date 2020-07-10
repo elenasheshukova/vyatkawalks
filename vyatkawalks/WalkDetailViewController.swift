@@ -62,16 +62,25 @@ class WalkDetailViewController: UIViewController {
     func getPlaces() -> [PlaceEntity] {
         var places: [PlaceEntity] = []
         let request: NSFetchRequest<PlaceEntity> = PlaceEntity.fetchRequest()
-        if let walkID = walk?.id {
-            //let predicate = NSPredicate(format: "ANY walk.id == %@", walkID)
-            let placesId = walk?.placesid?.components(separatedBy: " ")
-            let predicate = NSPredicate(format: "id IN %@", placesId as! CVarArg)
-            request.predicate = predicate
-        }
-        do {
-            places = try appDelegate.persistentContainer.viewContext.fetch(request)
-        } catch {
-            print(error)
+//        if let walkID = walk?.id {
+//            let predicate = NSPredicate(format: "ANY walk.id == %@", walkID)
+//            request.predicate = predicate
+//        }
+//        do {
+//            places = try appDelegate.persistentContainer.viewContext.fetch(request)
+//        } catch {
+//            print(error)
+//        }
+        if let placesId = walk?.placesid?.components(separatedBy: " "){
+            for id in placesId {
+                let predicate = NSPredicate(format: "id == %@", id)
+                request.predicate = predicate
+                do {
+                    places += try appDelegate.persistentContainer.viewContext.fetch(request)
+                } catch {
+                    print(error)
+                }
+            }
         }
         return places
     }
