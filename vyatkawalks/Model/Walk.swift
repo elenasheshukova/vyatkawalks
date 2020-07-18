@@ -13,11 +13,4 @@ struct Walk: Decodable {
     var image: String
     var text: String
     var places: [String]
-
-//    init(_ id: String, _ name: String, _ image: String, _ text: String){
-//        self.id = id//UUID().uuidString
-//        self.name = name
-//        self.image = image
-//        self.text = text
-//    }
 }

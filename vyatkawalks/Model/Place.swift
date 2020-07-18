@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Place: Codable {
+struct Place: Decodable {
     var id: String
     var name: String
     var image: String
@@ -15,4 +15,5 @@ struct Place: Codable {
     var address: String
     var coordinateLatitude: String
     var coordinateLongitude: String
+    var images: [String]
 }

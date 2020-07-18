@@ -104,6 +104,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 placeEntity.address = place.address
                 placeEntity.coordinateLatitude = place.coordinateLatitude
                 placeEntity.coordinateLongitude = place.coordinateLongitude
+                
+                for image in place.images {
+                    let imageEntity = ImageEntity(context: appDelegate.persistentContainer.viewContext)
+                    imageEntity.id = UUID().uuidString
+                    imageEntity.name = image
+                    imageEntity.place = placeEntity
+                }
             }
         }
         
@@ -140,10 +147,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let deleteRequestWalk = NSBatchDeleteRequest(fetchRequest: deleteFetchWalk)
         let deleteFetchPlace = NSFetchRequest<NSFetchRequestResult>(entityName: "PlaceEntity")
         let deleteRequestPlace = NSBatchDeleteRequest(fetchRequest: deleteFetchPlace)
+        let deleteFetchImage = NSFetchRequest<NSFetchRequestResult>(entityName: "ImageEntity")
+        let deleteRequestImage = NSBatchDeleteRequest(fetchRequest: deleteFetchImage)
 
         do {
             try appDelegate.persistentContainer.viewContext.execute(deleteRequestWalk)
             try appDelegate.persistentContainer.viewContext.execute(deleteRequestPlace)
+            try appDelegate.persistentContainer.viewContext.execute(deleteRequestImage)
             appDelegate.saveContext()
         } catch {
             print ("There was an error")

@@ -12,30 +12,26 @@ class PlaceDetailViewController: UIViewController {
     
     var place: PlaceEntity? {
         didSet {
-//            if let images = place?.images {
-//                for image in images {
-//                    self.images.append(UIImage(named: image as! String)!)
-//                }
-//            }
+            for image in place?.images?.allObjects as! [ImageEntity] {
+                if let imageName = image.name {
+                    if let img = UIImage(named: imageName){
+                        self.images.append(img)
+                    }
+                }
+            }
             if self.images.count < 1, let imageName = place?.image {
-                if let image = UIImage(named: imageName){
-                    self.images.append(image)
+                if let img = UIImage(named: imageName){
+                    self.images.append(img)
                 }
             }
         }
     }
     var images : [UIImage] = []
+    var timer = Timer()
+    var counter = 0
     
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var pageForSliderCollectionView: UIPageControl!
-    
-    
-//    @IBOutlet weak var imageView: UIImageView! {
-//        didSet {
-//            guard let image = place?.image else {return}
-//            imageView.image = UIImage(named: image)
-//        }
-//    }
 //    @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var textLabel: UILabel! {
@@ -53,6 +49,15 @@ class PlaceDetailViewController: UIViewController {
         sliderCollectionView.dataSource = self
         //mapView.delegate = self
         
+        pageForSliderCollectionView.numberOfPages = images.count
+        pageForSliderCollectionView.currentPage = 0
+        if images.count <= 1 {
+            pageForSliderCollectionView.isHidden = true
+        }
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
+        }
+        
 //        if let latitude = place?.coordinateLatitude, let longitude = place?.coordinateLongitude {
 //            let annotation = PlaceMKPointAnnotation()
 //            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(latitude) ?? 0, longitude: Double(longitude) ?? 0)
@@ -68,6 +73,19 @@ class PlaceDetailViewController: UIViewController {
         
     }
     
+    @objc func changeImage(){
+        if counter < images.count{
+            let index = IndexPath.init(item: counter, section: 0)
+            self.sliderCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+        } else {
+            counter = 0
+            let index = IndexPath.init(item: counter, section: 0)
+            self.sliderCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
+        }
+        pageForSliderCollectionView.currentPage = counter
+        counter += 1
+    }
+    
 }
 
 extension PlaceDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -81,8 +99,6 @@ extension PlaceDetailViewController: UICollectionViewDelegate, UICollectionViewD
         if let vc = cell.viewWithTag(11) {
             if let vc2 = vc.viewWithTag(111) as? UIImageView {
                 vc2.image = images[indexPath.row]
-                
-         print("!!!")
             }
         }
         return cell

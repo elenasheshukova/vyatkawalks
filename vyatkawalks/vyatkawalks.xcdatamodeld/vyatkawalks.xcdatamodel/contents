@@ -3,7 +3,7 @@
     <entity name="ImageEntity" representedClassName=".ImageEntity" syncable="YES" codeGenerationType="category">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="url" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlaceEntity" inverseName="images" inverseEntity="PlaceEntity"/>
     </entity>
     <entity name="PlaceEntity" representedClassName=".PlaceEntity" syncable="YES" codeGenerationType="category">
@@ -26,8 +26,8 @@
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaceEntity" inverseName="walk" inverseEntity="PlaceEntity"/>
     </entity>
     <elements>
+        <element name="ImageEntity" positionX="1.1328125" positionY="-78.5625" width="128" height="103"/>
         <element name="PlaceEntity" positionX="-161.6328125" positionY="-79.3984375" width="128" height="178"/>
         <element name="WalkEntity" positionX="-342.01171875" positionY="-77.39453125" width="128" height="133"/>
-        <element name="ImageEntity" positionX="1.1328125" positionY="-78.5625" width="128" height="103"/>
     </elements>
 </model>
