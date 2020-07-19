@@ -13,6 +13,7 @@ class MapViewController: UIViewController {
     var locationManager = CLLocationManager()
     var places: [PlaceEntity] = []
     var route: Bool = false
+    var isDetailPlace = false
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -150,15 +151,17 @@ extension MapViewController: MKMapViewDelegate{
             annotationView?.pinTintColor = UIColor.darkGray
             annotationView?.canShowCallout = true
             
-            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            if !isDetailPlace {
+                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             
-            if let imageURL = placeAnnotation?.imageURL {
-                let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
-                leftIconView.image = UIImage(named: imageURL)
-                annotationView?.leftCalloutAccessoryView = leftIconView
-                //annotationView?.detailCalloutAccessoryView = leftIconView
-                //let offset = CGPoint(x: leftIconView.frame.size.width / 2, y: -(leftIconView.frame.size.height / 2) )
-                //annotationView?.centerOffset = offset
+                if let imageURL = placeAnnotation?.imageURL {
+                    let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
+                    leftIconView.image = UIImage(named: imageURL)
+                    annotationView?.leftCalloutAccessoryView = leftIconView
+                    //annotationView?.detailCalloutAccessoryView = leftIconView
+                    //let offset = CGPoint(x: leftIconView.frame.size.width / 2, y: -(leftIconView.frame.size.height / 2) )
+                    //annotationView?.centerOffset = offset
+                }
             }
         } else {
             annotationView?.annotation = annotation

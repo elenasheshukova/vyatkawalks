@@ -32,7 +32,6 @@ class PlaceDetailViewController: UIViewController {
     
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var pageForSliderCollectionView: UIPageControl!
-//    @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var textLabel: UILabel! {
         didSet {
@@ -47,7 +46,6 @@ class PlaceDetailViewController: UIViewController {
         
         sliderCollectionView.delegate = self
         sliderCollectionView.dataSource = self
-        //mapView.delegate = self
         
         pageForSliderCollectionView.numberOfPages = images.count
         pageForSliderCollectionView.currentPage = 0
@@ -57,20 +55,6 @@ class PlaceDetailViewController: UIViewController {
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
         }
-        
-//        if let latitude = place?.coordinateLatitude, let longitude = place?.coordinateLongitude {
-//            let annotation = PlaceMKPointAnnotation()
-//            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(latitude) ?? 0, longitude: Double(longitude) ?? 0)
-//            annotation.title = place?.name ?? ""
-//            annotation.subtitle = place?.address ?? ""
-//            annotation.imageURL = place?.image ?? ""
-//            mapView.addAnnotations([annotation])
-//            mapView.showAnnotations([annotation], animated: true)
-//            print("!!!!!!!!")
-//        }
-//         mapView.isHidden = false
-//
-        
     }
     
     @objc func changeImage(){
@@ -86,6 +70,17 @@ class PlaceDetailViewController: UIViewController {
         counter += 1
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMapForPlace" {
+            if let vc = segue.destination as? MapViewController,  place != nil{
+                var places : [PlaceEntity] = []
+                places.append(place!)
+                vc.places = places
+                vc.route = false
+                vc.isDetailPlace = true
+            }
+        }
+    }
 }
 
 extension PlaceDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
