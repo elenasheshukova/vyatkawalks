@@ -15,7 +15,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ImageEntity" inverseName="place" inverseEntity="ImageEntity"/>
-        <relationship name="walk" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WalkEntity" inverseName="places" inverseEntity="WalkEntity"/>
+        <relationship name="walksStops" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WalksStopEntity" inverseName="place" inverseEntity="WalksStopEntity"/>
     </entity>
     <entity name="WalkEntity" representedClassName=".WalkEntity" syncable="YES" codeGenerationType="category">
         <attribute name="id" attributeType="String"/>
@@ -23,11 +23,20 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="placesid" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
-        <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaceEntity" inverseName="walk" inverseEntity="PlaceEntity"/>
+        <relationship name="stops" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WalksStopEntity" inverseName="walk" inverseEntity="WalksStopEntity"/>
+    </entity>
+    <entity name="WalksStopEntity" representedClassName=".WalksStopEntity" syncable="YES" codeGenerationType="category">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlaceEntity" inverseName="walksStops" inverseEntity="PlaceEntity"/>
+        <relationship name="walk" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WalkEntity" inverseName="stops" inverseEntity="WalkEntity"/>
     </entity>
     <elements>
-        <element name="ImageEntity" positionX="1.1328125" positionY="-78.5625" width="128" height="103"/>
-        <element name="PlaceEntity" positionX="-161.6328125" positionY="-79.3984375" width="128" height="178"/>
-        <element name="WalkEntity" positionX="-342.01171875" positionY="-77.39453125" width="128" height="133"/>
+        <element name="ImageEntity" positionX="79.90234375" positionY="-168.3828125" width="128" height="103"/>
+        <element name="PlaceEntity" positionX="-90.62890625" positionY="-263.97265625" width="128" height="178"/>
+        <element name="WalkEntity" positionX="-416.66796875" positionY="-280.765625" width="128" height="133"/>
+        <element name="WalksStopEntity" positionX="-255.2265625" positionY="-245.46875" width="128" height="133"/>
     </elements>
 </model>

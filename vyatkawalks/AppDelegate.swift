@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //deleteAllRecords()
+//        deleteAllRecords()
         
         let defaults = UserDefaults.standard
         let isPreloaded = defaults.bool(forKey: "isPreloaded")
@@ -126,12 +126,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 walkEntity.text = walk.text
                 walkEntity.placesid = walk.places.joined(separator:" ")
             
-                if walk.places.count > 0 {
-                    let request: NSFetchRequest<PlaceEntity> = PlaceEntity.fetchRequest()
-                    let predicate = NSPredicate(format: "id IN %@", walk.places)
-                    request.predicate = predicate
-                    let pl = try! appDelegate.persistentContainer.viewContext.fetch(request)
-                    walkEntity.places = NSSet(array: pl)
+//                if walk.places.count > 0 {
+//                    let request: NSFetchRequest<PlaceEntity> = PlaceEntity.fetchRequest()
+//                    let predicate = NSPredicate(format: "id IN %@", walk.places)
+//                    request.predicate = predicate
+//                    let pl = try! appDelegate.persistentContainer.viewContext.fetch(request)
+//                    walkEntity.places = NSSet(array: pl)
+//                }
+                
+                if walk.stops.count > 0 {
+                    //print(walk.stops)
+                    for stop in walk.stops {
+                        let stopEntity = WalksStopEntity(context: appDelegate.persistentContainer.viewContext)
+                        stopEntity.id = stop.id
+                        stopEntity.name = stop.name
+                        stopEntity.text = stop.text
+                        stopEntity.image = stop.image
+                        stopEntity.walk = walkEntity
+                        let request: NSFetchRequest<PlaceEntity> = PlaceEntity.fetchRequest()
+                        let predicate = NSPredicate(format: "id == %@", stop.place)
+                        request.predicate = predicate
+                        let pl = try! appDelegate.persistentContainer.viewContext.fetch(request)
+                        stopEntity.place = pl.first!
+                    }
                 }
             }
         }
@@ -145,6 +162,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let deleteFetchWalk = NSFetchRequest<NSFetchRequestResult>(entityName: "WalkEntity")
         let deleteRequestWalk = NSBatchDeleteRequest(fetchRequest: deleteFetchWalk)
+        let deleteFetchStop = NSFetchRequest<NSFetchRequestResult>(entityName: "WalksStopEntity")
+        let deleteRequestStop = NSBatchDeleteRequest(fetchRequest: deleteFetchStop)
         let deleteFetchPlace = NSFetchRequest<NSFetchRequestResult>(entityName: "PlaceEntity")
         let deleteRequestPlace = NSBatchDeleteRequest(fetchRequest: deleteFetchPlace)
         let deleteFetchImage = NSFetchRequest<NSFetchRequestResult>(entityName: "ImageEntity")
@@ -152,6 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         do {
             try appDelegate.persistentContainer.viewContext.execute(deleteRequestWalk)
+            try appDelegate.persistentContainer.viewContext.execute(deleteRequestStop)
             try appDelegate.persistentContainer.viewContext.execute(deleteRequestPlace)
             try appDelegate.persistentContainer.viewContext.execute(deleteRequestImage)
             appDelegate.saveContext()

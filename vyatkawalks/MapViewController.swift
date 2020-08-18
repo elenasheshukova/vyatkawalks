@@ -12,7 +12,7 @@ class MapViewController: UIViewController {
     
     var locationManager = CLLocationManager()
     var places: [PlaceEntity] = []
-    var route: Bool = false
+    var isWalk: Bool = false
     var isDetailPlace = false
     
     @IBOutlet weak var mapView: MKMapView!
@@ -40,7 +40,7 @@ class MapViewController: UIViewController {
         mapView.showAnnotations(annotations, animated: true)
             
         //Рисуем маршрут
-        if route && annotations.count > 1 {
+        if isWalk && annotations.count > 1 {
             for i in 0..<annotations.count - 1 {
                 let startPoint = MKPlacemark(coordinate: annotations[i].coordinate)
                 let endPoint = MKPlacemark(coordinate: annotations[i + 1].coordinate)

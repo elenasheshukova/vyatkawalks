@@ -151,5 +151,77 @@
     "coordinateLatitude" : "58.609946",
     "coordinateLongitude" : "49.688564",
     "images" : []
+},{
+    "id" : "p51",
+    "name" : "Дом Колошина",
+    "image" : "kupzi_koloshini.jpg",
+    "text" : "",
+    "address" : "ул. Московская, 32",
+    "coordinateLatitude" : "58.603388",
+    "coordinateLongitude" : "49.669683",
+    "images" : []
+},{
+    "id" : "p52",
+    "name" : "Областной музей истории народного образования",
+    "image" : "kupzi_prozorovi.jpg",
+    "text" : "",
+    "address" : "ул. Московская, 33",
+    "coordinateLatitude" : "58.603780",
+    "coordinateLongitude" : "49.671510",
+    "images" : []
+},{
+    "id" : "p53",
+    "name" : "Дом Рязанцева",
+    "image" : "kupzi_ryazanzevi.jpg",
+    "text" : "",
+    "address" : "ул. Московская, 28",
+    "coordinateLatitude" : "58.603490",
+    "coordinateLongitude" : "49.671483",
+    "images" : []
+},{
+    "id" : "p54",
+    "name" : "Вятская мужская гимназия",
+    "image" : "kupzi_mashkovzevi.jpg",
+    "text" : "",
+    "address" : "ул. Спасская, 12а",
+    "coordinateLatitude" : "58.601915",
+    "coordinateLongitude" : "49.677946",
+    "images" : []
+},{
+    "id" : "p55",
+    "name" : "Торговый дом Кардакова",
+    "image" : "kupzi_kardakovi.jpg",
+    "text" : "",
+    "address" : "ул. Ленина, 75/ул. Спасская, 19",
+    "coordinateLatitude" : "58.602255",
+    "coordinateLongitude" : "49.680813",
+    "images" : []
+},{
+    "id" : "p56",
+    "name" : "Магазин Клобукова",
+    "image" : "kupzi_klobukovi.jpg",
+    "text" : "",
+    "address" : "ул. Спасская, 15",
+    "coordinateLatitude" : "58.602325",
+    "coordinateLongitude" : "49.684165",
+    "images" : []
+},{
+    "id" : "p57",
+    "name" : "Особняк Булычева",
+    "image" : "kupzi_bulichevi.jpg",
+    "text" : "",
+    "address" : "ул. Ленина, 96а",
+    "coordinateLatitude" : "58.597958",
+    "coordinateLongitude" : "49.682012",
+    "images" : []
+},{
+    "id" : "p58",
+    "name" : "Дом Лаптева",
+    "image" : "kupzi_laptevi.jpg",
+    "text" : "",
+    "address" : "ул. Ленина, 87а",
+    "coordinateLatitude" : "58.597789",
+    "coordinateLongitude" : "49.681170",
+    "images" : []
 }
 ]

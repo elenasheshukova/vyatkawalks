@@ -10,7 +10,6 @@
 		E7167FF124A0D5F600A3EE97 /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7167FF024A0D5F600A3EE97 /* PlaceDetailViewController.swift */; };
 		E7167FF324A134D700A3EE97 /* PlaceMKPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7167FF224A134D700A3EE97 /* PlaceMKPointAnnotation.swift */; };
 		E7167FFB24A4BF3000A3EE97 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7167FFA24A4BF3000A3EE97 /* MapViewController.swift */; };
-		E7167FFD24A4E16B00A3EE97 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7167FFC24A4E16B00A3EE97 /* ListViewController.swift */; };
 		E7167FFF24B636F600A3EE97 /* ImageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7167FFE24B636F600A3EE97 /* ImageEntity.swift */; };
 		E716854024B7B57100A3EE97 /* places.json in Resources */ = {isa = PBXBuildFile; fileRef = E716853F24B7B57100A3EE97 /* places.json */; };
 		E716854224B7B65400A3EE97 /* walks.json in Resources */ = {isa = PBXBuildFile; fileRef = E716854124B7B65400A3EE97 /* walks.json */; };
@@ -30,13 +29,14 @@
 		E7B836EE24928E2C00D20C0F /* vyatkawalks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7B836EC24928E2C00D20C0F /* vyatkawalks.xcdatamodeld */; };
 		E7B836F124928ED400D20C0F /* WalkEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B836F024928ED400D20C0F /* WalkEntity.swift */; };
 		E7B836F324928EFF00D20C0F /* PlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B836F224928EFF00D20C0F /* PlaceEntity.swift */; };
+		E7B89A2024E95E23008D7B04 /* WalksStopEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B89A1F24E95E23008D7B04 /* WalksStopEntity.swift */; };
+		E7E8B5C724EBD8DC00B38A3D /* PlacesListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7E8B5C624EBD8DC00B38A3D /* PlacesListTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E7167FF024A0D5F600A3EE97 /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaceDetailViewController.swift; path = vyatkawalks/PlaceDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		E7167FF224A134D700A3EE97 /* PlaceMKPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMKPointAnnotation.swift; sourceTree = "<group>"; };
 		E7167FFA24A4BF3000A3EE97 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		E7167FFC24A4E16B00A3EE97 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		E7167FFE24B636F600A3EE97 /* ImageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEntity.swift; sourceTree = "<group>"; };
 		E716853F24B7B57100A3EE97 /* places.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = places.json; sourceTree = "<group>"; };
 		E716854124B7B65400A3EE97 /* walks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = walks.json; sourceTree = "<group>"; };
@@ -58,6 +58,8 @@
 		E7B836EF24928E9900D20C0F /* vyatkawalks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vyatkawalks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7B836F024928ED400D20C0F /* WalkEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkEntity.swift; sourceTree = "<group>"; };
 		E7B836F224928EFF00D20C0F /* PlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceEntity.swift; sourceTree = "<group>"; };
+		E7B89A1F24E95E23008D7B04 /* WalksStopEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalksStopEntity.swift; sourceTree = "<group>"; };
+		E7E8B5C624EBD8DC00B38A3D /* PlacesListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacesListTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +104,10 @@
 				E725613C2486B276008D3291 /* WalksListCollectionViewCell.swift */,
 				E725613E2486CBE9008D3291 /* WalkDetailViewController.swift */,
 				E7167FFA24A4BF3000A3EE97 /* MapViewController.swift */,
-				E7167FFC24A4E16B00A3EE97 /* ListViewController.swift */,
 				E7167FF224A134D700A3EE97 /* PlaceMKPointAnnotation.swift */,
 				E72561372484305A008D3291 /* PlacesListViewController.swift */,
 				E72AF2A0249AA3D2004FDF49 /* PlacesListTableViewCell.swift */,
+				E7E8B5C624EBD8DC00B38A3D /* PlacesListTableViewCell.xib */,
 				E7167FF024A0D5F600A3EE97 /* PlaceDetailViewController.swift */,
 				E725612A2483F6F8008D3291 /* Assets.xcassets */,
 				E725612C2483F6F8008D3291 /* LaunchScreen.storyboard */,
@@ -121,6 +123,7 @@
 				E72561402487CFBE008D3291 /* Walk.swift */,
 				E72561422487D02B008D3291 /* Place.swift */,
 				E7B836F024928ED400D20C0F /* WalkEntity.swift */,
+				E7B89A1F24E95E23008D7B04 /* WalksStopEntity.swift */,
 				E7B836F224928EFF00D20C0F /* PlaceEntity.swift */,
 				E7167FFE24B636F600A3EE97 /* ImageEntity.swift */,
 			);
@@ -197,6 +200,7 @@
 				E725612E2483F6F8008D3291 /* LaunchScreen.storyboard in Resources */,
 				E725612B2483F6F8008D3291 /* Assets.xcassets in Resources */,
 				E72561292483F6F6008D3291 /* Main.storyboard in Resources */,
+				E7E8B5C724EBD8DC00B38A3D /* PlacesListTableViewCell.xib in Resources */,
 				E716854224B7B65400A3EE97 /* walks.json in Resources */,
 				E716854024B7B57100A3EE97 /* places.json in Resources */,
 			);
@@ -253,7 +257,6 @@
 				E725613F2486CBE9008D3291 /* WalkDetailViewController.swift in Sources */,
 				E72561262483F6F6008D3291 /* WalksListViewController.swift in Sources */,
 				E72561412487CFBE008D3291 /* Walk.swift in Sources */,
-				E7167FFD24A4E16B00A3EE97 /* ListViewController.swift in Sources */,
 				E72561432487D02B008D3291 /* Place.swift in Sources */,
 				E7167FF324A134D700A3EE97 /* PlaceMKPointAnnotation.swift in Sources */,
 				E72561222483F6F6008D3291 /* AppDelegate.swift in Sources */,
@@ -262,6 +265,7 @@
 				E72561242483F6F6008D3291 /* SceneDelegate.swift in Sources */,
 				E725613D2486B276008D3291 /* WalksListCollectionViewCell.swift in Sources */,
 				E7B836F124928ED400D20C0F /* WalkEntity.swift in Sources */,
+				E7B89A2024E95E23008D7B04 /* WalksStopEntity.swift in Sources */,
 				E7B836F324928EFF00D20C0F /* PlaceEntity.swift in Sources */,
 				E7167FFF24B636F600A3EE97 /* ImageEntity.swift in Sources */,
 				E7167FFB24A4BF3000A3EE97 /* MapViewController.swift in Sources */,

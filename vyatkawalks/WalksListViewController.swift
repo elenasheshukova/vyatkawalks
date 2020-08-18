@@ -55,8 +55,8 @@ extension WalksListViewController: UICollectionViewDataSource, UICollectionViewD
             //cell.nameLabel.text = walks[indexPath.item].name
             
             cell.imageView.image = UIImage(named: walks[indexPath.item].image ?? "")
-            if let places = walks[indexPath.item].places {
-                cell.countPlacesLabel.text = declensionOfNouns(number: places.count, form1: "остановка", form2: "остановки", form3: "остановок")
+            if let stops = walks[indexPath.item].stops {
+                cell.countPlacesLabel.text = declensionOfNouns(number: stops.count, form1: "остановка", form2: "остановки", form3: "остановок")
             } else {
                 cell.countPlacesLabel.text = ""
             }

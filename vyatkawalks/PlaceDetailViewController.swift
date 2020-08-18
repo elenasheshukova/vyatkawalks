@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import AVFoundation
 
 class PlaceDetailViewController: UIViewController {
     
@@ -76,7 +77,7 @@ class PlaceDetailViewController: UIViewController {
                 var places : [PlaceEntity] = []
                 places.append(place!)
                 vc.places = places
-                vc.route = false
+                vc.isWalk = false
                 vc.isDetailPlace = true
             }
         }
