@@ -7,61 +7,15 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapViewController: UIViewController {
     
     var locationManager = CLLocationManager()
-    var places: [PlaceEntity] = []
-    var isWalk: Bool = false
     var isDetailPlace = false
-    
-    @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        mapView.delegate = self
-        
-        var annotations: [MKPointAnnotation] = []
-        
-        for i in 0..<places.count {
-            let place = places[i]
-            if let latitude = place.coordinateLatitude, let longitude = place.coordinateLongitude {
-                let annotation = PlaceMKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2D(latitude: Double(latitude) ?? 0, longitude: Double(longitude) ?? 0)
-                annotation.title = place.name ?? ""
-                annotation.subtitle = place.address ?? ""
-                annotation.imageURL = place.image ?? ""
-                annotation.id = i
-                annotations.append(annotation)
-            }
-        }
-        mapView.addAnnotations(annotations)
-        mapView.showAnnotations(annotations, animated: true)
-            
-        //Рисуем маршрут
-        if isWalk && annotations.count > 1 {
-            for i in 0..<annotations.count - 1 {
-                let startPoint = MKPlacemark(coordinate: annotations[i].coordinate)
-                let endPoint = MKPlacemark(coordinate: annotations[i + 1].coordinate)
-                let requestDirections = MKDirections.Request()
-                    requestDirections.source = MKMapItem(placemark: startPoint)
-                requestDirections.destination = MKMapItem(placemark: endPoint)
-                requestDirections.transportType = .walking
-                let directions = MKDirections(request: requestDirections)
-                directions.calculate { (response, error) in
-                    // guard response = response else { return }
-                    for route in response!.routes {
-                        self.mapView.addOverlay(route.polyline)
-                    }
-                }
-            }
-        }
-                
-                
-        if let location = annotations.first?.coordinate {
-            mapView.setRegion(MKCoordinateRegion(center: location, latitudinalMeters: 500, longitudinalMeters: 500), animated: true)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -88,7 +42,7 @@ class MapViewController: UIViewController {
         case .authorizedAlways:
             break
         case .authorizedWhenInUse:
-            mapView.showsUserLocation = true
+//            mapView.showsUserLocation = true
             locationManager.startUpdatingLocation()
             break
         case .denied:
@@ -173,7 +127,7 @@ extension MapViewController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? PlaceMKPointAnnotation {
             if control == view.rightCalloutAccessoryView{
-                performSegue(withIdentifier: "showPlaceDetail", sender: places[annotation.id])
+ //               performSegue(withIdentifier: "showPlaceDetail", sender: places[annotation.id])
             }
         }
     }
@@ -181,12 +135,12 @@ extension MapViewController: MKMapViewDelegate{
 }
 
 extension MapViewController: CLLocationManagerDelegate{
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last?.coordinate {
-            let region = MKCoordinateRegion(center: location, latitudinalMeters: 1000, longitudinalMeters: 1000)
-            mapView.setRegion(region, animated: true)
-        }
-    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        if let location = locations.last?.coordinate {
+//            let region = MKCoordinateRegion(center: location, latitudinalMeters: 1000, longitudinalMeters: 1000)
+////            mapView.setRegion(region, animated: true)
+//        }
+//    }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkAuthorization()
     }

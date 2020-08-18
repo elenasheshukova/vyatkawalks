@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import  MapKit
 
-class WalkDetailViewController: UIViewController {
+class WalkDetailViewController: MapViewController {
 
     var walk: WalkEntity? {
         didSet {
@@ -27,9 +28,8 @@ class WalkDetailViewController: UIViewController {
     
     @IBOutlet weak var placesListSegmentedControl: UISegmentedControl!
     @IBOutlet weak var descriptionView: UIView!
-    @IBOutlet weak var mapViewContainer: UIView!
     @IBOutlet weak var listTableView: UITableView!
-    
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
             guard let image = walk?.image else {return}
@@ -48,38 +48,76 @@ class WalkDetailViewController: UIViewController {
         self.title = walk?.name
         
         listTableView.isHidden = true
-        mapViewContainer.isHidden = true
+        mapView.isHidden = true
         descriptionView.isHidden = false
         
         listTableView.delegate = self
         listTableView.dataSource = self
+        
+        mapView.delegate = self
+        
+        var annotations: [MKPointAnnotation] = []
+        
+        for i in 0..<stops.count {
+            let stop = stops[i]
+            if let latitude = stop.place?.coordinateLatitude, let longitude = stop.place?.coordinateLongitude {
+                let annotation = PlaceMKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: Double(latitude) ?? 0, longitude: Double(longitude) ?? 0)
+                annotation.title = stop.name ?? ""
+                annotation.subtitle = stop.place?.address ?? ""
+                annotation.imageURL = stop.image ?? ""
+                annotation.id = i
+                annotations.append(annotation)
+            }
+        }
+        mapView.addAnnotations(annotations)
+        mapView.showAnnotations(annotations, animated: true)
+        
+        //Рисуем маршрут
+        if annotations.count > 1 {
+            for i in 0..<annotations.count - 1 {
+                let startPoint = MKPlacemark(coordinate: annotations[i].coordinate)
+                let endPoint = MKPlacemark(coordinate: annotations[i + 1].coordinate)
+                let requestDirections = MKDirections.Request()
+                requestDirections.source = MKMapItem(placemark: startPoint)
+                requestDirections.destination = MKMapItem(placemark: endPoint)
+                requestDirections.transportType = .walking
+                let directions = MKDirections(request: requestDirections)
+                directions.calculate { (response, error) in
+                // guard response = response else { return }
+                for route in response!.routes {
+                    self.mapView.addOverlay(route.polyline)
+                }
+                }
+            }
+        }
+        
+        //Центрируем карту
+        if let location = annotations.first?.coordinate {
+            mapView.setRegion(MKCoordinateRegion(center: location, latitudinalMeters: 500, longitudinalMeters: 500), animated: true)
+        }
+        
     }
 
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
         switch placesListSegmentedControl.selectedSegmentIndex {
         case 0:
             listTableView.isHidden = true
-            mapViewContainer.isHidden = true
+            mapView.isHidden = true
             descriptionView.isHidden = false
         case 1:
             descriptionView.isHidden = true
             listTableView.isHidden = true
-            mapViewContainer.isHidden = false
+            mapView.isHidden = false
         case 2:
             descriptionView.isHidden = true
-            mapViewContainer.isHidden = true
+            mapView.isHidden = true
             listTableView.isHidden = false
         default: break
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMap" {
-            if let vc = segue.destination as? MapViewController {
-                //vc.places = self.places
-                vc.isWalk = true
-            }
-        }
         if segue.identifier == "showPlaceDetail" {
             if let vc = segue.destination as? PlaceDetailViewController {
                 vc.place = sender as? PlaceEntity

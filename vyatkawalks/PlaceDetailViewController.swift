@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import AVFoundation
 
-class PlaceDetailViewController: UIViewController {
+class PlaceDetailViewController: MapViewController {
     
     var place: PlaceEntity? {
         didSet {
@@ -40,6 +40,7 @@ class PlaceDetailViewController: UIViewController {
             textLabel.sizeToFit()
         }
     }
+    @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,26 @@ class PlaceDetailViewController: UIViewController {
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
         }
+        
+        
+        mapView.delegate = self
+        
+        var annotations: [MKPointAnnotation] = []
+        
+        if let latitude = place?.coordinateLatitude, let longitude = place?.coordinateLongitude {
+            let annotation = PlaceMKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(latitude) ?? 0, longitude: Double(longitude) ?? 0)
+            annotation.title = place?.name ?? ""
+            annotation.subtitle = place?.address ?? ""
+            annotation.imageURL = place?.image ?? ""
+            annotations.append(annotation)
+        }
+        mapView.addAnnotations(annotations)
+        mapView.showAnnotations(annotations, animated: true)
+        //Центрируем карту
+        if let location = annotations.first?.coordinate {
+            mapView.setRegion(MKCoordinateRegion(center: location, latitudinalMeters: 500, longitudinalMeters: 500), animated: true)
+        }
     }
     
     @objc func changeImage(){
@@ -69,18 +90,6 @@ class PlaceDetailViewController: UIViewController {
         }
         pageForSliderCollectionView.currentPage = counter
         counter += 1
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMapForPlace" {
-            if let vc = segue.destination as? MapViewController,  place != nil{
-                var places : [PlaceEntity] = []
-                places.append(place!)
-                vc.places = places
-                vc.isWalk = false
-                vc.isDetailPlace = true
-            }
-        }
     }
 }
 
