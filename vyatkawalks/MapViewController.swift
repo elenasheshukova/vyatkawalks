@@ -25,16 +25,12 @@ class MapViewController: UIViewController {
     
     func checkLocationEnabled(){
         if CLLocationManager.locationServicesEnabled() {
-            setupManager()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
             checkAuthorization()
         } else {
             showAlertLocation(title: "У Вас выключена служба геолокации", massage: "Хотите включить?", url: URL(string: "App-Prefs:root= LOCATION_SERVISES"))
         }
-    }
-    
-    func setupManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     func checkAuthorization(){
@@ -42,7 +38,6 @@ class MapViewController: UIViewController {
         case .authorizedAlways:
             break
         case .authorizedWhenInUse:
-//            mapView.showsUserLocation = true
             locationManager.startUpdatingLocation()
             break
         case .denied:
@@ -138,7 +133,7 @@ extension MapViewController: CLLocationManagerDelegate{
 //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        if let location = locations.last?.coordinate {
 //            let region = MKCoordinateRegion(center: location, latitudinalMeters: 1000, longitudinalMeters: 1000)
-////            mapView.setRegion(region, animated: true)
+//            mapView.setRegion(region, animated: true)
 //        }
 //    }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

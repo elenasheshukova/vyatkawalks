@@ -13,6 +13,7 @@ struct Stop: Decodable {
     var image: String
     var text: String
     var place: String
+    var sort: Int
 }
 
 struct Walk: Decodable {

@@ -12,15 +12,7 @@ class WalkDetailViewController: MapViewController {
 
     var walk: WalkEntity? {
         didSet {
-//            if let placesId = walk?.placesid?.components(separatedBy: " "){
-//                for id in placesId {
-//                    if let place = (walk?.places?.allObjects as! [PlaceEntity]).first(where: {$0.id == id}) {
-//                        self.places.append(place)
-//                    }
-//                }
-//            }
-            
-            self.stops = walk?.stops?.allObjects as! [WalksStopEntity]
+            self.stops = (walk?.stops?.allObjects as! [WalksStopEntity]).sorted { $0.sort < $1.sort }
         }
     }
     var stops: [WalksStopEntity] = []
@@ -63,7 +55,7 @@ class WalkDetailViewController: MapViewController {
             if let latitude = stop.place?.coordinateLatitude, let longitude = stop.place?.coordinateLongitude {
                 let annotation = PlaceMKPointAnnotation()
                 annotation.coordinate = CLLocationCoordinate2D(latitude: Double(latitude) ?? 0, longitude: Double(longitude) ?? 0)
-                annotation.title = stop.name ?? ""
+                annotation.title = String(stop.sort) + ". " + (stop.name ?? "")
                 annotation.subtitle = stop.place?.address ?? ""
                 annotation.imageURL = stop.image ?? ""
                 annotation.id = i
@@ -78,6 +70,7 @@ class WalkDetailViewController: MapViewController {
             for i in 0..<annotations.count - 1 {
                 let startPoint = MKPlacemark(coordinate: annotations[i].coordinate)
                 let endPoint = MKPlacemark(coordinate: annotations[i + 1].coordinate)
+                print(annotations[i].title)
                 let requestDirections = MKDirections.Request()
                 requestDirections.source = MKMapItem(placemark: startPoint)
                 requestDirections.destination = MKMapItem(placemark: endPoint)

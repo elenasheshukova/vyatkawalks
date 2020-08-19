@@ -13,11 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        deleteAllRecords()
+        deleteAllRecords()
         
         let defaults = UserDefaults.standard
         let isPreloaded = defaults.bool(forKey: "isPreloaded")
-        if !isPreloaded {
+        if isPreloaded {
             preloadData()
             defaults.set(true, forKey: "isPreloaded")
         }
@@ -134,6 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                    walkEntity.places = NSSet(array: pl)
 //                }
                 
+                var sort = 1
                 if walk.stops.count > 0 {
                     //print(walk.stops)
                     for stop in walk.stops {
@@ -143,6 +144,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         stopEntity.text = stop.text
                         stopEntity.image = stop.image
                         stopEntity.walk = walkEntity
+                        stopEntity.sort = Int16(sort)
+                        sort += 1
                         let request: NSFetchRequest<PlaceEntity> = PlaceEntity.fetchRequest()
                         let predicate = NSPredicate(format: "id == %@", stop.place)
                         request.predicate = predicate
