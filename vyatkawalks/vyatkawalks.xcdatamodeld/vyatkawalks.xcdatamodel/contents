@@ -21,7 +21,6 @@
         <attribute name="id" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="placesid" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <relationship name="stops" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WalksStopEntity" inverseName="walk" inverseEntity="WalksStopEntity"/>
     </entity>
@@ -37,7 +36,7 @@
     <elements>
         <element name="ImageEntity" positionX="79.90234375" positionY="-168.3828125" width="128" height="103"/>
         <element name="PlaceEntity" positionX="-90.62890625" positionY="-263.97265625" width="128" height="178"/>
-        <element name="WalkEntity" positionX="-416.66796875" positionY="-280.765625" width="128" height="133"/>
+        <element name="WalkEntity" positionX="-416.66796875" positionY="-280.765625" width="128" height="118"/>
         <element name="WalksStopEntity" positionX="-255.2265625" positionY="-245.46875" width="128" height="148"/>
     </elements>
 </model>

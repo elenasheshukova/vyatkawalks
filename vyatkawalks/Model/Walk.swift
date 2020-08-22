@@ -21,6 +21,5 @@ struct Walk: Decodable {
     var name: String
     var image: String
     var text: String
-    var places: [String]
     var stops : [Stop]
 }

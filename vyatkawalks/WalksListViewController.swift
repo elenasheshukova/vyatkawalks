@@ -41,7 +41,7 @@ class WalksListViewController: UIViewController {
 
 }
 
-extension WalksListViewController: UICollectionViewDataSource, UICollectionViewDelegate/*, UICollectionViewDelegateFlowLayout*/{
+extension WalksListViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return walks.count
@@ -55,11 +55,6 @@ extension WalksListViewController: UICollectionViewDataSource, UICollectionViewD
             //cell.nameLabel.text = walks[indexPath.item].name
             
             cell.imageView.image = UIImage(named: walks[indexPath.item].image ?? "")
-            if let stops = walks[indexPath.item].stops {
-                cell.countPlacesLabel.text = declensionOfNouns(number: stops.count, form1: "остановка", form2: "остановки", form3: "остановок")
-            } else {
-                cell.countPlacesLabel.text = ""
-            }
             return cell
         }
         return UICollectionViewCell()
@@ -69,31 +64,10 @@ extension WalksListViewController: UICollectionViewDataSource, UICollectionViewD
         let walk = walks[indexPath.item]
         self.performSegue(withIdentifier: "showWalkDetail", sender: walk)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 200, height: 200)
-//    }
-    
-    
-    func declensionOfNouns(number: Int, form1: String, form2: String, form3: String) -> String {
-        var str = ""
-        if number >= 11 && number <= 19 {
-            str = form3
-        }
-        else {
-            var rest = number
-            while rest > 10 {
-                rest = rest % 10
-            }
-            switch rest {
-            case 1:
-                str = form1
-            case 2, 3, 4:
-                str = form2
-            default:
-                str = form3
-            }
-        }
-        return "\(number) \(str)"
+}
+
+extension WalksListViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (walksListCollectionView.frame.width - 10)/2, height: (walksListCollectionView.frame.width - 10)/3)
     }
 }

@@ -17,7 +17,6 @@ class WalkDetailViewController: MapViewController {
     }
     var stops: [WalksStopEntity] = []
     
-    
     @IBOutlet weak var placesListSegmentedControl: UISegmentedControl!
     @IBOutlet weak var descriptionView: UIView!
     @IBOutlet weak var listTableView: UITableView!
@@ -70,7 +69,6 @@ class WalkDetailViewController: MapViewController {
             for i in 0..<annotations.count - 1 {
                 let startPoint = MKPlacemark(coordinate: annotations[i].coordinate)
                 let endPoint = MKPlacemark(coordinate: annotations[i + 1].coordinate)
-                print(annotations[i].title)
                 let requestDirections = MKDirections.Request()
                 requestDirections.source = MKMapItem(placemark: startPoint)
                 requestDirections.destination = MKMapItem(placemark: endPoint)
@@ -130,7 +128,7 @@ extension WalkDetailViewController: UITableViewDelegate, UITableViewDataSource {
             //let cell = listTableView.dequeueReusableCell(withIdentifier: "placeCell") as! PlacesListTableViewCell
             if let cell = Bundle.main.loadNibNamed("PlacesListTableViewCell", owner: self, options: nil)?.first as? PlacesListTableViewCell {
                 cell.placeImageView.image = UIImage(named: stops[indexPath.row].image ?? "")
-                cell.nameLabel.text = stops[indexPath.row].name ?? ""
+                cell.nameLabel.text = String(stops[indexPath.row].sort) + ". " +  String(stops[indexPath.row].name ?? "")
                 cell.addressLabel.text = stops[indexPath.row].place?.address ?? ""
                 return cell
             }
